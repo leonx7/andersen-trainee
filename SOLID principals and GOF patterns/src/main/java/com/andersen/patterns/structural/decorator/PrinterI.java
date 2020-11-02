@@ -1,4 +1,4 @@
-package com.andersen.patterns.structural.adapter.decorator;
+package com.andersen.patterns.structural.decorator;
 
 //Component interface
 public interface PrinterI {

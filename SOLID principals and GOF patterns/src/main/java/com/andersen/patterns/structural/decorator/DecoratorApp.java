@@ -1,4 +1,4 @@
-package com.andersen.patterns.structural.adapter.decorator;
+package com.andersen.patterns.structural.decorator;
 
 public class DecoratorApp {
     public static void main(String[] args) {

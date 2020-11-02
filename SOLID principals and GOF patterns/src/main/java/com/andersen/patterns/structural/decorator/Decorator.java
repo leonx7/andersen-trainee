@@ -1,4 +1,4 @@
-package com.andersen.patterns.structural.adapter.decorator;
+package com.andersen.patterns.structural.decorator;
 
 public abstract class Decorator implements PrinterI {
     PrinterI component;

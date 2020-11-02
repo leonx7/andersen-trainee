@@ -1,4 +1,4 @@
-package com.andersen.patterns.structural.adapter.decorator;
+package com.andersen.patterns.structural.decorator;
 
 //Concrete decorator #2
 public class BracketsDecorator extends Decorator {
