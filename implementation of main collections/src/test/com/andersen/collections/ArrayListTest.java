@@ -64,11 +64,7 @@ class ArrayListTest {
         for (int i = 0; i < 15; i++) {
             arrList.add(i + 1);
         }
-        System.out.println(arrList.size());
-        System.out.println(arrList.length());
         assertEquals(15, arrList.remove(14));
-        System.out.println(arrList.size());
-        System.out.println(arrList.length());
     }
 
     @Test

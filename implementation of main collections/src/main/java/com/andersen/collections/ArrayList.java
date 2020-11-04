@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<E> implements Iterable<E> {
+public class ArrayList<E> implements Iterable<E>, Queue<E> {
     private E[] elements;
     private static final int DEFAULT_CAPACITY = 10;
     private int size;
@@ -102,6 +102,28 @@ public class ArrayList<E> implements Iterable<E> {
             System.arraycopy(newElements, index + 1, newElements, index, newSize - index);
         newElements[size = newSize] = null;
         return oldValue;
+    }
+
+    /* Retrieves, but does not remove, the head of this queue. It returns Null if the queue is empty. */
+    @Override
+    public E peek() {
+        if(size() > 0)
+            return elements[0];
+        return null;
+    }
+
+    /* This method is similar to peek(). It throws NoSuchElementException when the queue is empty */
+    @Override
+    public E element() {
+        if(size() == 0)
+            throw new NoSuchElementException("The queue is empty");
+        return elements[0];
+    }
+
+    /* Retrieves and removes the head of this queue */
+    @Override
+    public E poll() {
+        return remove(0);
     }
 
     /* Increases the capacity of this instance till specified as the argument */
