@@ -1,6 +1,7 @@
 package com.andersen.patterns.behavioral.observer;
 
 import java.io.File;
+import java.util.Objects;
 
 public class Editor {
     public EventManager events;
@@ -11,12 +12,12 @@ public class Editor {
     }
 
     public void openFile(String filePath) {
-        this.file = new File(filePath);
+        file = new File(filePath);
         events.notify("open", file);
     }
 
     public void saveFile() throws Exception {
-        if (this.file != null) {
+        if (Objects.nonNull(file)) {
             events.notify("save", file);
         } else {
             throw new Exception("Please open a file first");
