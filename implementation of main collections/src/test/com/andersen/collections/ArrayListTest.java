@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ArrayListTest {
     private static final ArrayList<Integer> arrList = new ArrayList<>();
 
+    @BeforeAll
     public static void initialize() {
         arrList.add(1);
         arrList.add(2);
@@ -19,9 +20,6 @@ class ArrayListTest {
     @Test
     @Order(1)
     void add() {
-        arrList.add(1);
-        arrList.add(2);
-        arrList.add(3);
         assertEquals(3, arrList.size());
     }
 

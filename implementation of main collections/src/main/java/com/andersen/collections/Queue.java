@@ -1,7 +1,5 @@
 package com.andersen.collections;
 
-import java.util.NoSuchElementException;
-
 public interface Queue<E> {
     /* Retrieves, but does not remove, the head of this queue. It returns Null if the queue is empty. */
     E peek();
