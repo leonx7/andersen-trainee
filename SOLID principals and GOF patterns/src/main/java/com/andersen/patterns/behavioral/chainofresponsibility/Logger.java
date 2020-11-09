@@ -1,5 +1,7 @@
 package com.andersen.patterns.behavioral.chainofresponsibility;
 
+import java.util.Objects;
+
 //Abstract handler
 public abstract class Logger {
     public static final int ERROR = 1;
@@ -21,7 +23,7 @@ public abstract class Logger {
         if (this.priority <= priority) {
             write(message);
         }
-        if (next != null) {
+        if (Objects.nonNull(next)) {
             next.writeMessage(message, priority);
         }
     }

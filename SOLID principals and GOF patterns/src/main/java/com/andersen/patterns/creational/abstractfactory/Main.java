@@ -2,7 +2,7 @@ package com.andersen.patterns.creational.abstractfactory;
 
 public class Main {
     public static void main(String[] args) {
-        DeviceFactory deviceFactory = getDeviceFactory("EN");
+        DeviceFactory deviceFactory = getDeviceFactory(Language.RU);
 
         Keyboard keyboard = deviceFactory.getKeyboard();
         Mouse mouse = deviceFactory.getMouse();
@@ -13,11 +13,10 @@ public class Main {
         touchpad.track(10, 20);
     }
 
-    public static DeviceFactory getDeviceFactory(String lang) {
+    public static DeviceFactory getDeviceFactory(Language lang) {
         return switch (lang) {
-            case "RU" -> new RuDeviceFactory();
-            case "EN" -> new EnDeviceFactory();
-            default -> throw new RuntimeException("Unsupported country code: " + lang);
+            case RU -> new RuDeviceFactory();
+            case EN -> new EnDeviceFactory();
         };
     }
 }
