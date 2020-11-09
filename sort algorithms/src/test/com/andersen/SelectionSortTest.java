@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BubbleSortTest {
+class SelectionSortTest {
     private static long[] toSort;
     private static long[] sorted;
 
@@ -18,7 +18,7 @@ class BubbleSortTest {
     }
 
     @Test
-    void bubbleSort() {
-        assertEquals(Arrays.toString(sorted), Arrays.toString(BubbleSort.bubbleSort(toSort)));
+    void selectionSort() {
+        assertEquals(Arrays.toString(sorted), Arrays.toString(SelectionSort.selectionSort(toSort)));
     }
 }
