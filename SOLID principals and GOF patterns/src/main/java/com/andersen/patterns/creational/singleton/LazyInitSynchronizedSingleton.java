@@ -11,7 +11,7 @@ public class LazyInitSynchronizedSingleton {
     public static LazyInitSynchronizedSingleton getINSTANCE() {
         if (Objects.isNull(INSTANCE)) {
             synchronized (LazyInitSynchronizedSingleton.class) {
-                if (INSTANCE == null)
+                if (Objects.isNull(INSTANCE))
                     INSTANCE = new LazyInitSynchronizedSingleton();
             }
         }

@@ -35,11 +35,11 @@ class QueueTest {
     void poll() {
         initVar();
         assertEquals(10, arrList.size());
-        assertEquals(1,arrList.poll());
+        assertEquals(1, arrList.poll());
         assertEquals(9, arrList.size());
     }
 
-    private void initVar(){
+    private void initVar() {
         for (int i = 0; i < 10; i++) {
             arrList.add(i + 1);
         }

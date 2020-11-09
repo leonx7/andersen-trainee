@@ -2,6 +2,7 @@ package com.andersen.collections;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 //Bidirectional linked list
 public class LinkedList<E> implements Iterable<E> {
@@ -29,7 +30,7 @@ public class LinkedList<E> implements Iterable<E> {
 
         @Override
         public boolean hasNext() {
-            return node != null;
+            return Objects.nonNull(node);
         }
 
         @Override
@@ -68,14 +69,14 @@ public class LinkedList<E> implements Iterable<E> {
         final Node next = node.next;
         final Node prev = node.previous;
 
-        if (prev == null) {
+        if (Objects.isNull(prev)) {
             head = next;
         } else {
             prev.next = next;
             node.previous = null;
         }
 
-        if (next == null) {
+        if (Objects.isNull(next)) {
             tail = prev;
         } else {
             next.previous = prev;
@@ -102,7 +103,7 @@ public class LinkedList<E> implements Iterable<E> {
 
         /* 4. If the Linked List is empty, then make the new
          * node as head */
-        if (head == null) {
+        if (Objects.isNull(head)) {
             node.previous = null;
             head = node;
             tail = node;
@@ -110,7 +111,7 @@ public class LinkedList<E> implements Iterable<E> {
         }
 
         /* 5. Else traverse till the last node */
-        while (last.next != null) {
+        while (Objects.nonNull(last.next)) {
             last = last.next;
         }
 
@@ -126,15 +127,15 @@ public class LinkedList<E> implements Iterable<E> {
      * unchanged
    `*/
     public boolean remove(Object o) {
-        if (o == null) {
-            for (Node x = head; x != null; x = x.next) {
-                if (x.data == null) {
+        if (Objects.isNull(o)) {
+            for (Node x = head; Objects.nonNull(x); x = x.next) {
+                if (Objects.isNull(x.data)) {
                     unlink(x);
                     return true;
                 }
             }
         } else {
-            for (Node x = head; x != null; x = x.next) {
+            for (Node x = head; Objects.nonNull(x); x = x.next) {
                 if (o.equals(x.data)) {
                     unlink(x);
                     return true;
@@ -167,14 +168,14 @@ public class LinkedList<E> implements Iterable<E> {
     */
     public int indexOf(Object o) {
         int index = 0;
-        if (o == null) {
-            for (Node x = head; x != null; x = x.next) {
-                if (x.data == null)
+        if (Objects.isNull(o)) {
+            for (Node x = head; Objects.nonNull(x); x = x.next) {
+                if (Objects.isNull(x.data))
                     return index;
                 index++;
             }
         } else {
-            for (Node x = head; x != null; x = x.next) {
+            for (Node x = head; Objects.nonNull(x); x = x.next) {
                 if (o.equals(x.data))
                     return index;
                 index++;
@@ -190,7 +191,7 @@ public class LinkedList<E> implements Iterable<E> {
     public Object[] toArray() {
         Object[] result = new Object[size];
         int i = 0;
-        for (Node x = head; x != null; x = x.next)
+        for (Node x = head; Objects.nonNull(x); x = x.next)
             result[i++] = x.data;
         return result;
     }

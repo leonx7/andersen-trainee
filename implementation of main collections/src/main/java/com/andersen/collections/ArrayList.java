@@ -107,7 +107,7 @@ public class ArrayList<E> implements Iterable<E>, Queue<E> {
     /* Retrieves, but does not remove, the head of this queue. It returns Null if the queue is empty. */
     @Override
     public E peek() {
-        if(size() > 0)
+        if (size() > 0)
             return elements[0];
         return null;
     }
@@ -115,7 +115,7 @@ public class ArrayList<E> implements Iterable<E>, Queue<E> {
     /* This method is similar to peek(). It throws NoSuchElementException when the queue is empty */
     @Override
     public E element() {
-        if(size() == 0)
+        if (size() == 0)
             throw new NoSuchElementException("The queue is empty");
         return elements[0];
     }

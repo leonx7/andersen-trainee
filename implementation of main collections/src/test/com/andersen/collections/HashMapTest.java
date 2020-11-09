@@ -94,7 +94,7 @@ class HashMapTest {
         List<String> keys = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
 
-        for (HashMap.Entry<String,Integer> entry : hm.entrySet()) {
+        for (HashMap.Entry<String, Integer> entry : hm.entrySet()) {
             keys.add(entry.getKey());
             values.add(entry.getValue());
         }

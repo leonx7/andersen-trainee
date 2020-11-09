@@ -152,7 +152,7 @@ public class HashMap<K, V> {
         size--;
         while (Objects.nonNull(current)) {
             if ((Objects.isNull(current.key) && Objects.isNull(key)) || current.key.equals(key)) {
-                if (previous == null) {
+                if (Objects.isNull(previous)) {
                     current = current.next;
                     table[index] = current;
                 } else {
@@ -203,7 +203,7 @@ public class HashMap<K, V> {
     /* Computes key.hashCode() and spreads (XORs) higher bits of hash to lower */
     private int hash(Object key) {
         int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        return (Objects.isNull(key)) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
     /* Doubles table size and recomputes the bucket numbers for storing Entry objects */
