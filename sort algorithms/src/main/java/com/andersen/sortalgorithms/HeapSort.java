@@ -1,8 +1,8 @@
 package com.andersen.sortalgorithms;
 
+//The complexity of the algorithm O(N * log N);
 public class HeapSort {
-    public static void sort(long[] arr)
-    {
+    public static void sort(long[] arr) {
         int n = arr.length;
 
         // Build heap (rearrange array)
@@ -10,8 +10,7 @@ public class HeapSort {
             heapify(arr, n, i);
 
         // One by one extract an element from heap
-        for (int i=n-1; i>0; i--)
-        {
+        for (int i = n - 1; i > 0; i--) {
             // Move current root to end
             long temp = arr[0];
             arr[0] = arr[i];
@@ -24,11 +23,10 @@ public class HeapSort {
 
     // To heapify a subtree rooted with node i which is
     // an index in arr[]. n is size of heap
-    private static void heapify(long[] arr, int n, int i)
-    {
+    private static void heapify(long[] arr, int n, int i) {
         int largest = i; // Initialize largest as root
-        int l = 2*i + 1; // left = 2*i + 1
-        int r = 2*i + 2; // right = 2*i + 2
+        int l = 2 * i + 1; // left = 2*i + 1
+        int r = 2 * i + 2; // right = 2*i + 2
 
         // If left child is larger than root
         if (l < n && arr[l] > arr[largest])
@@ -39,8 +37,7 @@ public class HeapSort {
             largest = r;
 
         // If largest is not root
-        if (largest != i)
-        {
+        if (largest != i) {
             long swap = arr[i];
             arr[i] = arr[largest];
             arr[largest] = swap;

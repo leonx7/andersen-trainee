@@ -3,9 +3,9 @@ package com.andersen.sortalgorithms;
 import java.util.ArrayDeque;
 
 /*
-* The complexity of the algorithm O(N * log N);
-* Requires an allocation of additional memory which is equal to the length of the sorting array
-*/
+ * The complexity of the algorithm O(N * log N);
+ * Requires an allocation of additional memory which is equal to the length of the sorting array
+ */
 public class MergeSort {
     public static long[] sort(long[] arr, int lowerBound, int upperBound) {
         int middle;

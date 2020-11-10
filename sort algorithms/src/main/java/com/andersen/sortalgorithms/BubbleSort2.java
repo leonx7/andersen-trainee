@@ -1,5 +1,6 @@
 package com.andersen.sortalgorithms;
 
+//The complexity of the algorithm O(N^2);
 public class BubbleSort2 {
     public static void sort(long[] arr) {
         boolean needIteration = true;
