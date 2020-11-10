@@ -1,11 +1,11 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class BubbleSortTest {
+class BubbleSort2Test {
     private static long[] toSort;
     private static long[] sorted;
 
@@ -15,9 +15,10 @@ class BubbleSortTest {
         sorted = new long[]{-7, 0, 1, 5, 66, 88, 89, 123, 200, 255};
     }
 
+
     @Test
     void bubbleSort() {
-        BubbleSort.bubbleSort(toSort);
+        long after = System.nanoTime();
         assertArrayEquals(sorted, toSort);
     }
 }

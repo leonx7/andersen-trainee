@@ -1,7 +1,7 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
 public class BubbleSort2 {
-    public static void bubbleSort(long[] arr) {
+    public static void sort(long[] arr) {
         boolean needIteration = true;
         while (needIteration) {
             needIteration = false;

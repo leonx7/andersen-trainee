@@ -1,4 +1,4 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
 import java.util.ArrayDeque;
 
@@ -7,14 +7,15 @@ import java.util.ArrayDeque;
 * Requires an allocation of additional memory which is equal to the length of the sorting array
 */
 public class MergeSort {
-    public static long[] mergeSort(long[] arr, int lowerBound, int upperBound) {
+    public static long[] sort(long[] arr, int lowerBound, int upperBound) {
         int middle;
         if (lowerBound < upperBound) {
             middle = (lowerBound + upperBound) / 2;
-            mergeSort(arr, lowerBound, middle);
-            mergeSort(arr, middle + 1, upperBound);
+            sort(arr, lowerBound, middle);
+            sort(arr, middle + 1, upperBound);
             merge(arr, lowerBound, middle, upperBound);
         }
+
         return arr;
     }
 

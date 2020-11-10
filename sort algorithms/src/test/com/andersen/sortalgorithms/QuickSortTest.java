@@ -1,5 +1,6 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
+import com.andersen.sortalgorithms.QuickSort;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class QuickSortTest {
 
     @Test
     void quickSort() {
-        QuickSort.quickSort(toSort, 0, toSort.length - 1);
+        QuickSort.sort(toSort, 0, toSort.length - 1);
         assertArrayEquals(sorted, toSort);
     }
 }

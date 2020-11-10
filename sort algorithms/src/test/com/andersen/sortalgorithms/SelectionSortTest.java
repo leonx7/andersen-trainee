@@ -1,5 +1,6 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
+import com.andersen.sortalgorithms.SelectionSort;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class SelectionSortTest {
 
     @Test
     void selectionSort() {
-        SelectionSort.selectionSort(toSort);
+        SelectionSort.sort(toSort);
         assertArrayEquals(sorted, toSort);
     }
 }

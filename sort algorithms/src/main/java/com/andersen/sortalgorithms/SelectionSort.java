@@ -1,8 +1,8 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
 //The complexity of the algorithm O(N^2);
 public class SelectionSort {
-    public static long[] selectionSort(long[] arr) {
+    public static long[] sort(long[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] > arr[j]) {

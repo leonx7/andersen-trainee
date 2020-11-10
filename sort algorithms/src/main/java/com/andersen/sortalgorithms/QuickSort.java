@@ -1,13 +1,13 @@
-package com.andersen;
+package com.andersen.sortalgorithms;
 
 //The best-case complexity of the algorithm O(N * log N);
 public class QuickSort {
-    public static void quickSort(long[] arr, int l, int h) {
+    public static void sort(long[] arr, int l, int h) {
         int p;
         if ((h - l) > 0) {
             p = partition(arr, l, h);
-            quickSort(arr, l, p - 1);
-            quickSort(arr, p + 1, h);
+            sort(arr, l, p - 1);
+            sort(arr, p + 1, h);
         }
     }
 

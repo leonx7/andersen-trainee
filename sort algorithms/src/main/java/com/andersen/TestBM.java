@@ -1,5 +1,13 @@
 package com.andersen;
 
+import com.andersen.sortalgorithms.BubbleSort;
+import com.andersen.sortalgorithms.BubbleSort2;
+import com.andersen.sortalgorithms.HeapSort;
+import com.andersen.sortalgorithms.InsertionSort;
+import com.andersen.sortalgorithms.MergeSort;
+import com.andersen.sortalgorithms.QuickSort;
+import com.andersen.sortalgorithms.SelectionSort;
+import com.andersen.sortalgorithms.ShellSort;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -16,7 +24,7 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void bubbleSortBM() {
-        BubbleSort.bubbleSort(getArray());
+        BubbleSort.sort(getArray());
     }
 
     @Benchmark
@@ -25,7 +33,7 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void bubbleSortBM2() {
-        BubbleSort2.bubbleSort(getArray());
+        BubbleSort2.sort(getArray());
     }
 
     @Benchmark
@@ -34,7 +42,7 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void selectionSortBM() {
-        SelectionSort.selectionSort(getArray());
+        SelectionSort.sort(getArray());
     }
 
     @Benchmark
@@ -43,7 +51,7 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void insertionSortBM() {
-        InsertionSort.insertionSort(getArray());
+        InsertionSort.sort(getArray());
     }
 
     @Benchmark
@@ -52,7 +60,7 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void mergeSortBM() {
-        MergeSort.mergeSort(getArray(), 0, 9999);
+        MergeSort.sort(getArray(), 0, 9999);
     }
 
     @Benchmark
@@ -61,8 +69,27 @@ public class TestBM {
     @Warmup(iterations = 2)
     @Measurement(iterations = 10)
     public void quickSortBM() {
-        QuickSort.quickSort(getArray(), 0, 9999);
+        QuickSort.sort(getArray(), 0, 9999);
     }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @Fork(value = 1)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 10)
+    public void shellSortBM2() {
+        ShellSort.sort(getArray());
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @Fork(value = 1)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 10)
+    public void heapSortBM2() {
+        HeapSort.sort(getArray());
+    }
+
 
     private long[] getArray() {
         Random random = new Random();
