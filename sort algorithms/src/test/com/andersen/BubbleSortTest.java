@@ -3,9 +3,7 @@ package com.andersen;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class BubbleSortTest {
     private static long[] toSort;
@@ -19,6 +17,7 @@ class BubbleSortTest {
 
     @Test
     void bubbleSort() {
-        assertEquals(Arrays.toString(sorted), Arrays.toString(BubbleSort.bubbleSort(toSort)));
+        BubbleSort.bubbleSort(toSort);
+        assertArrayEquals(sorted, toSort);
     }
 }

@@ -3,9 +3,7 @@ package com.andersen;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class SelectionSortTest {
     private static long[] toSort;
@@ -19,6 +17,7 @@ class SelectionSortTest {
 
     @Test
     void selectionSort() {
-        assertEquals(Arrays.toString(sorted), Arrays.toString(SelectionSort.selectionSort(toSort)));
+        SelectionSort.selectionSort(toSort);
+        assertArrayEquals(sorted, toSort);
     }
 }

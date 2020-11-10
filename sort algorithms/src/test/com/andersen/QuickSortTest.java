@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class InsertionSortTest {
+class QuickSortTest {
     private static long[] toSort;
     private static long[] sorted;
 
@@ -16,8 +16,8 @@ class InsertionSortTest {
     }
 
     @Test
-    void insertionSort() {
-        InsertionSort.insertionSort(toSort);
+    void quickSort() {
+        QuickSort.quickSort(toSort, 0, toSort.length - 1);
         assertArrayEquals(sorted, toSort);
     }
 }

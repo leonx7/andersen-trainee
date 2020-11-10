@@ -3,9 +3,7 @@ package com.andersen;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class MergeSortTest {
     private static long[] toSort;
@@ -20,6 +18,7 @@ class MergeSortTest {
 
     @Test
     void mergeSort() {
-        assertEquals(Arrays.toString(sorted), Arrays.toString(MergeSort.mergeSort(toSort, 0, toSort.length - 1)));
+        MergeSort.mergeSort(toSort, 0, toSort.length - 1);
+        assertArrayEquals(sorted, toSort);
     }
 }
