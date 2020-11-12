@@ -18,7 +18,7 @@ class BubbleSort2Test {
 
     @Test
     void bubbleSort() {
-        long after = System.nanoTime();
+        BubbleSort2.sort(toSort);
         assertArrayEquals(sorted, toSort);
     }
 }
