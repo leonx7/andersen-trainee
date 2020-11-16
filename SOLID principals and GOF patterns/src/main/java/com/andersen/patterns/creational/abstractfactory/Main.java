@@ -14,9 +14,13 @@ public class Main {
     }
 
     public static DeviceFactory getDeviceFactory(Language lang) {
-        return switch (lang) {
-            case RU -> new RuDeviceFactory();
-            case EN -> new EnDeviceFactory();
-        };
+        switch (lang) {
+            case RU:
+                return new RuDeviceFactory();
+            case EN:
+                return new EnDeviceFactory();
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 }
