@@ -1,3 +1,5 @@
+package com.andersen;
+
 public class Test3 {
     private static int counter = 0;
 
