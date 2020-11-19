@@ -98,7 +98,6 @@ class MyThread2 implements Runnable {
 }
 
 class MyThread3 implements Callable<Object> {
-
     @Override
     public Object call() {
         for (int i = 0; i < 1000; i++) {

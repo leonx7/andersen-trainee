@@ -29,7 +29,7 @@ public class Test4 {
     }
 
     public static void produce() throws InterruptedException {
-        synchronized (lock){
+        synchronized (lock) {
             System.out.println("Producer thread started");
             lock.wait();
             System.out.println("Producer thread resumed");
@@ -39,11 +39,10 @@ public class Test4 {
     public static void consume() throws InterruptedException {
         Thread.sleep(2000);
         Scanner scanner = new Scanner(System.in);
-        synchronized (lock){
+        synchronized (lock) {
             System.out.println("Waiting for return key pressed");
             scanner.nextLine();
             lock.notify();
         }
-
     }
 }
