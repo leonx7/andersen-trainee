@@ -54,9 +54,9 @@ public class Test {
         System.out.println("*******************************************************");
 
         /*
-         * Creates thread pool for recursive tasks,
-         * where all threads in the pool attempt to find and execute tasks
-         * submitted to the pool and/or created by other active tasks.
+         * Creates a single-threaded executor
+         * that can schedule commands to run after a given delay,
+         * or to execute periodically.
          */
         ScheduledExecutorService executorService4 = Executors.newSingleThreadScheduledExecutor();
         for (int i = 0; i < 5; i++) {
@@ -67,9 +67,9 @@ public class Test {
         System.out.println("*******************************************************");
 
         /*
-         * Creates a single-threaded executor
-         * that can schedule commands to run after a given delay,
-         * or to execute periodically.
+         * Creates thread pool for recursive tasks,
+         * where all threads in the pool attempt to find and execute tasks
+         * submitted to the pool and/or created by other active tasks.
          */
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         int result = forkJoinPool.invoke(new Fibonacci(10));
@@ -140,6 +140,7 @@ class Fibonacci extends RecursiveTask<Integer> {
         f1.fork();
         Fibonacci f2 = new Fibonacci(n - 2);
         f2.fork();
+        System.out.println(Thread.currentThread().getName());
         return f1.join() + f2.join();
     }
 }

@@ -13,7 +13,7 @@ public class Test6 {
         for (int i = 0; i < 10; i++)
             list.add(counterHolder);
 
-        list.parallelStream().forEach(CounterHolder::increment);
+        list.parallelStream().forEach(CounterHolder::increment);//
 
         System.out.println(counterHolder.getCounter());
     }
