@@ -1,5 +1,6 @@
 package com.andersen.shop.model;
 
+import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,27 +8,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Catalog {
+    @Getter
     private Map<Integer, Product> products = new HashMap<>();
 
-    private static final Logger logger = LogManager.getLogger(Catalog.class);
+    static private final Logger logger = LogManager.getLogger(Catalog.class);
 
-    public void add(Integer number, Product product) {
-        products.put(number, product);
+    public void add(Integer productId, Product product) {
+        products.put(productId, product);
         logger.info("Product with id " + product.getId() + " added to catalog");
     }
 
-    public void delete(Integer id) {
-        products.remove(id);
-        logger.info("Product with id " + id + " removed from catalog");
+    public void delete(Integer productId) {
+        products.remove(productId);
+        logger.info("Product with id " + productId + " removed from catalog");
     }
 
-    public Product getProduct(Integer number) {
-        return products.get(number);
+    public Product getProduct(Integer productId) {
+        return products.get(productId);
     }
 
     public void display() {
-        for (Integer number : products.keySet()) {
-            System.out.println(products.get(number));
+        for (Integer productId : products.keySet()) {
+            System.out.println(products.get(productId));
         }
     }
 }

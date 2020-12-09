@@ -3,22 +3,25 @@ package com.andersen.shop.model;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Basket {
+public class Basket implements Serializable {
+    private int userID;
     private Map<Integer, Integer> products = new HashMap<>();
 
-    private static final Logger logger = LogManager.getLogger(Basket.class);
+    static private final long serialVersionUID = 1L;
+    static private final Logger logger = LogManager.getLogger(Basket.class);
 
-    public void add(Integer id, Integer quantity) {
-        products.put(id, quantity);
-        logger.info("Product with id " + id + " added to basket");
+    public void add(Integer productId, Integer quantity) {
+        products.put(productId, quantity);
+        logger.info("Product with id " + productId + " added to basket");
     }
 
-    public void delete(Integer id) {
-        products.remove(id);
-        logger.info("Product with id " + id + " removed from basket");
+    public void delete(Integer productId) {
+        products.remove(productId);
+        logger.info("Product with id " + productId + " removed from basket");
     }
 
     public void clear() {

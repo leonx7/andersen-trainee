@@ -10,18 +10,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CatalogTest {
     private Catalog catalog;
+    private Currency byn;
 
     @BeforeEach
     public void initialize() {
+        byn = new Currency("Belorussian ruble", "BYN", 0.4);
         catalog = new Catalog();
-        catalog.add(1, new Product(1, "Milk", ProductGroup.Food, 2.0));
-        catalog.add(2, new Product(2, "Bread", ProductGroup.Food, 4.0));
-        catalog.add(3, new Product(3, "Knife", ProductGroup.NotFood, 35.0));
+        catalog.add(1, new Product(1, "Milk", ProductGroup.Food, 2.0, byn));
+        catalog.add(2, new Product(2, "Bread", ProductGroup.Food, 4.0, byn));
+        catalog.add(3, new Product(3, "Knife", ProductGroup.NotFood, 35.0, byn));
     }
 
     @Test
     void add() throws NoSuchFieldException, IllegalAccessException {
-        catalog.add(4, new Product(4, "Mirror", ProductGroup.NotFood, 20.0));
+        catalog.add(4, new Product(4, "Mirror", ProductGroup.NotFood, 20.0, byn));
         assertEquals(4, getProducts().size());
     }
 
@@ -33,7 +35,7 @@ class CatalogTest {
 
     @Test
     void getProduct() {
-        Product product = new Product(4, "Mirror", ProductGroup.NotFood, 20.0);
+        Product product = new Product(4, "Mirror", ProductGroup.NotFood, 20.0, byn);
         catalog.add(4, product);
         assertEquals(product, catalog.getProduct(4));
     }
