@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Warehouse {
     @Getter
-    private Map<Integer, Integer> items = new HashMap<>();
+    private final Map<Integer, Integer> items = new HashMap<>();
 
     public void add(Integer productId, Integer quantity) {
         items.put(productId, quantity);

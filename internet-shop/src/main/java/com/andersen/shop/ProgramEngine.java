@@ -68,7 +68,6 @@ public class ProgramEngine {
                     serializeBasket();
                     exit();
             }
-
         }
     }
 
@@ -85,7 +84,6 @@ public class ProgramEngine {
                     break;
             }
         }
-
     }
 
     private static void displayProductsFromCatalog(Catalog catalog) {
@@ -148,7 +146,6 @@ public class ProgramEngine {
                 product.setExpiryDate(LocalDate.of(year, month, day));
             }
         }
-
     }
 
     private static void deleteFromBasket() {
@@ -170,7 +167,6 @@ public class ProgramEngine {
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             basket = (Basket) objectInputStream.readObject();
         }
-
     }
 
     //Load the basket data saved in the file system

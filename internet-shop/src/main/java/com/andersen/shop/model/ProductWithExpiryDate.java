@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ProductWithExpiryDate extends Product {
-    @ExpiryDate
     @Setter
     @Getter
+    @ExpiryDate
     private LocalDate expiryDate;
 
     public ProductWithExpiryDate(int productId, String name, ProductGroup productGroup, double price, Currency currency) {
