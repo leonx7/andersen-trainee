@@ -19,6 +19,7 @@ public class App {
         catalog.add(3, new Product(3, "Knife", ProductGroup.NotFood, 35.0, usd));
         catalog.add(4, new Product(4, "Mirror", ProductGroup.NotFood, 20.0, usd));
 
-        ProgramEngine.run(catalog);
+        ProgramEngine programEngine = new ProgramEngine();
+        programEngine.run(catalog);
     }
 }

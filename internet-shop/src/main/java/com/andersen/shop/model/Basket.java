@@ -1,14 +1,19 @@
 package com.andersen.shop.model;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+@RequiredArgsConstructor
 public class Basket implements Serializable {
-    private int userID;
+    @NonNull
+    private UUID userID;
     private Map<Integer, Integer> products = new HashMap<>();
 
     static private final long serialVersionUID = 1L;
