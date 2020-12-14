@@ -7,9 +7,10 @@ import com.andersen.shop.model.ProductGroup;
 import com.andersen.shop.model.ProductWithExpiryDate;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         Currency byn = new Currency("Belorussian ruble", "BYN", 0.4);
         Currency usd = new Currency("US dollar", "USD", 2.5);
 

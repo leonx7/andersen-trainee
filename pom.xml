@@ -5,8 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>anderson-trainee</artifactId>
+    <artifactId>andersen-trainee</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>internet-shop</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -17,6 +21,8 @@
         <jmh-generator-annprocess.version>1.26</jmh-generator-annprocess.version>
         <junit-jupiter-api.version>5.7.0</junit-jupiter-api.version>
         <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
+        <servlet-api.version>4.0.1</servlet-api.version>
+        <websocket.version>2.4.0</websocket.version>
     </properties>
 
     <parent>
@@ -68,6 +74,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>${websocket.version}</version>
         </dependency>
 
         <dependency>
@@ -99,6 +106,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
         </dependency>
 
     </dependencies>
