@@ -5,6 +5,7 @@ import com.andersen.shop.model.Basket;
 import com.andersen.shop.model.Catalog;
 import com.andersen.shop.model.Product;
 import com.andersen.shop.model.ProductWithExpiryDate;
+import com.andersen.shop.model.User;
 import com.andersen.shop.model.Warehouse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,13 +22,14 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class ProgramEngine {
+    private User user = new User();
+    private Basket basket = new Basket(user.getUuid());
     static private Scanner input = new Scanner(System.in);
-    static private Basket basket = new Basket();
     static private Warehouse warehouse = new Warehouse();
 
     static private final Logger logger = LogManager.getLogger(ProgramEngine.class);
 
-    public static void run(Catalog catalog) throws IOException {
+    public void run(Catalog catalog) throws IOException {
         loadBasket();
         logger.info("Program started");
         System.out.println("--- Welcome to Online Shopping System ---");
@@ -43,7 +45,7 @@ public class ProgramEngine {
         }
     }
 
-    private static void purchaseProcessing(Catalog catalog) throws IOException {
+    private void purchaseProcessing(Catalog catalog) throws IOException {
         while (true) {
             System.out.println("\n\n 1) Show products  2) Add to basket  3) Remove from basket " +
                     " 4) Show your order  5) Clean the basket  6) Exit");
@@ -71,7 +73,7 @@ public class ProgramEngine {
         }
     }
 
-    private static void warehouseProcessing(Catalog catalog) {
+    private void warehouseProcessing(Catalog catalog) {
         while (true) {
             System.out.println("\n\n 1) Add product 2) Display products");
             int selection = input.nextInt();
@@ -86,7 +88,7 @@ public class ProgramEngine {
         }
     }
 
-    private static void displayProductsFromCatalog(Catalog catalog) {
+    private void displayProductsFromCatalog(Catalog catalog) {
         Map<Integer, Product> products = catalog.getProducts();
         for (Integer integer : products.keySet()) {
             Product product = products.get(integer);
@@ -95,7 +97,7 @@ public class ProgramEngine {
         }
     }
 
-    private static void displayProductsFromWarehouse(Catalog catalog) {
+    private void displayProductsFromWarehouse(Catalog catalog) {
         Map<Integer, Integer> items = warehouse.getItems();
         Set<Integer> itemsId = items.keySet();
         for (Integer itemId : itemsId) {
@@ -108,7 +110,7 @@ public class ProgramEngine {
         }
     }
 
-    private static void addToBasket() {
+    private void addToBasket() {
         int quantity;
         int productId;
         System.out.print("Product Id: ");
@@ -118,7 +120,7 @@ public class ProgramEngine {
         basket.add(productId, quantity);
     }
 
-    private static void addToWarehouse(Catalog catalog) {
+    private void addToWarehouse(Catalog catalog) {
         int quantity;
         int productId;
         System.out.print("Product Id: ");
@@ -140,7 +142,7 @@ public class ProgramEngine {
         warehouse.add(productId, quantity);
     }
 
-    private static void addExpiryDate(ProductWithExpiryDate product, int year, int month, int day) {
+    private void addExpiryDate(ProductWithExpiryDate product, int year, int month, int day) {
         for (Field field : product.getClass().getDeclaredFields()) {
             if (field.isAnnotationPresent(ExpiryDate.class)) {
                 product.setExpiryDate(LocalDate.of(year, month, day));
@@ -148,21 +150,21 @@ public class ProgramEngine {
         }
     }
 
-    private static void deleteFromBasket() {
+    private void deleteFromBasket() {
         int productId;
         System.out.println("Product id: ");
         productId = input.nextInt();
         basket.delete(productId);
     }
 
-    private static void serializeBasket() throws IOException {
+    private void serializeBasket() throws IOException {
         try (FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Lenovo\\Desktop\\save.ser");
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
             objectOutputStream.writeObject(basket);
         }
     }
 
-    private static void deserializeBasket() throws IOException, ClassNotFoundException {
+    private void deserializeBasket() throws IOException, ClassNotFoundException {
         try (FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Lenovo\\Desktop\\save.ser");
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             basket = (Basket) objectInputStream.readObject();
@@ -170,7 +172,7 @@ public class ProgramEngine {
     }
 
     //Load the basket data saved in the file system
-    private static void loadBasket() {
+    private void loadBasket() {
         try {
             deserializeBasket();
         } catch (IOException | ClassNotFoundException e) {
@@ -179,7 +181,7 @@ public class ProgramEngine {
     }
 
     // Compute a sale price based on purchase price and purchase currency
-    private static Double countPrice(Double price, String currencyCode) {
+    private Double countPrice(Double price, String currencyCode) {
         Double salePrice = null;
         switch (currencyCode) {
             case "BYN":
@@ -192,7 +194,7 @@ public class ProgramEngine {
         return salePrice;
     }
 
-    private static void exit() {
+    private void exit() {
         logger.info("Program finished");
         System.exit(0);
     }

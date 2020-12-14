@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +14,7 @@ class BasketTest {
 
     @BeforeEach
     public void initialize() {
-        basket = new Basket();
+        basket = new Basket(UUID.randomUUID());
         basket.add(1, 1);
         basket.add(2, 1);
         basket.add(3, 1);
