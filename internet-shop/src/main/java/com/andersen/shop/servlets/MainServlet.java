@@ -19,6 +19,9 @@ public class MainServlet extends HttpServlet {
         String action = req.getServletPath();
 
         switch (action) {
+            case "/register":
+                renderRegisterPage(req, resp);
+                break;
             default:
                 renderLoginPage(req, resp);
                 break;
@@ -30,10 +33,14 @@ public class MainServlet extends HttpServlet {
         String action = req.getServletPath();
         switch (action) {
             case "/login":
-                if (userService.login(req, resp)) {
+                if (userService.login(req)) {
                     renderShopPage(req, resp);
                 } else
                     throw new RuntimeException("Invalid username or password");
+                break;
+            case "/register":
+                userService.addUser(req);
+                resp.sendRedirect(req.getContextPath() + "/login");
                 break;
         }
     }
@@ -46,6 +53,11 @@ public class MainServlet extends HttpServlet {
 
     private void renderLoginPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private void renderRegisterPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("register.jsp");
         dispatcher.forward(req, resp);
     }
 
