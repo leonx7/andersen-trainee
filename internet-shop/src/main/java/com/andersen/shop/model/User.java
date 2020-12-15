@@ -1,10 +1,12 @@
 package com.andersen.shop.model;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.UUID;
 
+@Data
 public class User {
-    @Getter
-    UUID uuid = UUID.randomUUID();
+    private UUID uuid = UUID.randomUUID();
+    private String username;
+    private String password;
 }

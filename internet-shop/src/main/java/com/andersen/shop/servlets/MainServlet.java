@@ -1,6 +1,7 @@
 package com.andersen.shop.servlets;
 
 import com.andersen.shop.service.ProductService;
+import com.andersen.shop.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,16 +12,42 @@ import java.io.IOException;
 
 public class MainServlet extends HttpServlet {
     private ProductService productService = new ProductService();
+    private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("products", productService.getAllProducts());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("products.jsp");
-        dispatcher.forward(req, resp);
+        String action = req.getServletPath();
+
+        switch (action) {
+            default:
+                renderLoginPage(req, resp);
+                break;
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String action = req.getServletPath();
+        switch (action) {
+            case "/login":
+                if (userService.login(req, resp)) {
+                    renderShopPage(req, resp);
+                } else
+                    throw new RuntimeException("Invalid username or password");
+                break;
+        }
     }
+
+    private void renderShopPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("products", productService.getAllProducts());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("shop.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+    private void renderLoginPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+
 }

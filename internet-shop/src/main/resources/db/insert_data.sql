@@ -1,5 +1,5 @@
-INSERT INTO users (name)
-VALUES ('Bob');
+INSERT INTO users (name, password)
+VALUES ('Bob', '111');
 INSERT INTO orders (user_id, sum)
 VALUES (1, 2000.00);
 INSERT INTO products (name, price)

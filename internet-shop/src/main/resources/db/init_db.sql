@@ -8,36 +8,37 @@ DROP PROCEDURE IF EXISTS get_user_purchase_history;
 
 CREATE TABLE users
 (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(10) NOT NULL
+    id       INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name     VARCHAR(10) NOT NULL,
+    password VARCHAR(8) NOT NULL
 );
 
 CREATE TABLE products
 (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id    INTEGER AUTO_INCREMENT PRIMARY KEY,
     name  VARCHAR(15) NOT NULL,
-    price DOUBLE NOT NULL
+    price DOUBLE      NOT NULL
 );
 
 CREATE TABLE basket
 (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    user_id    INTEGER   NOT NULL,
+    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE products_in_basket
 (
     product_id INTEGER NOT NULL,
-    basket_id    INTEGER   NOT NULL,
-    PRIMARY KEY (product_id,basket_id)
+    basket_id  INTEGER NOT NULL,
+    PRIMARY KEY (product_id, basket_id)
 );
 
 CREATE TABLE orders
 (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    user_id  INTEGER NOT NULL,
-    sum      DOUBLE NOT NULL
+    id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    sum     DOUBLE  NOT NULL
 );
 
 CREATE TABLE order_info
