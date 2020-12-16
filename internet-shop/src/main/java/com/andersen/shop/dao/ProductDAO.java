@@ -17,7 +17,7 @@ public class ProductDAO {
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 ProductDto product = new ProductDto();
-                product.setId(resultSet.getInt("id"));
+                product.setProductId(resultSet.getInt("id"));
                 product.setName(resultSet.getString("name"));
                 product.setPrice(resultSet.getDouble("price"));
                 products.add(product);
@@ -26,5 +26,21 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return products;
+    }
+
+    public ProductDto getProductById(int id) {
+        ProductDto product = null;
+        String sql = "SELECT * FROM products WHERE id = ?";
+        try (PreparedStatement statement = ConnectionFactory.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            product = new ProductDto();
+            product.setName(resultSet.getString("name"));
+            product.setPrice(resultSet.getDouble("price"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 }

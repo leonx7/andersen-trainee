@@ -26,18 +26,19 @@ public class MainServlet extends HttpServlet {
                 renderLoginPage(req, resp);
                 break;
             case "/products":
-                renderShopPage(req,resp);
+                renderShopPage(req, resp);
                 break;
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getServletPath();
         switch (action) {
             case "/login":
                 if (userService.login(req)) {
-                    resp.sendRedirect(req.getContextPath() + "/products");
+                    resp.sendRedirect(req.getContextPath() + "/products?username=" + req.getParameter("username")
+                            + "&password=" + req.getParameter("password"));
                 } else
                     throw new RuntimeException("Invalid username or password");
                 break;
@@ -45,11 +46,16 @@ public class MainServlet extends HttpServlet {
                 userService.addUser(req);
                 resp.sendRedirect(req.getContextPath() + "/login");
                 break;
+            case "/products/add_to_basket":
+                productService.addToBasket(req);
+                break;
         }
     }
 
     private void renderShopPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("products", productService.getAllProducts());
+        req.setAttribute("productsFromBasket", productService.getProductsFromBasket(req));
+        req.setAttribute("userId", userService.getUserID(req));
         RequestDispatcher dispatcher = req.getRequestDispatcher("shop.jsp");
         dispatcher.forward(req, resp);
     }
@@ -63,6 +69,4 @@ public class MainServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("register.jsp");
         dispatcher.forward(req, resp);
     }
-
-
 }

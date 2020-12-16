@@ -17,7 +17,7 @@ class WarehouseTest {
 
     @Test
     void add() {
-        warehouse.add(4,20);
+        warehouse.add(4, 20);
         assertTrue(warehouse.getItems().containsKey(4));
         assertEquals(20, warehouse.getItems().get(4));
     }

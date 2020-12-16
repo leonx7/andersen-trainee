@@ -37,4 +37,21 @@ public class UserDao {
         }
         return status;
     }
+
+    public int getUserID(UserDto user) {
+        int id = 0;
+        String sql = "SELECT * FROM internet_shop.users WHERE name = ? AND password = ?";
+
+        try (PreparedStatement statement = ConnectionFactory.getConnection().prepareStatement(sql)) {
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
+        } catch (SQLException e) {
+            System.out.println("SQLException in getUserId()");
+            e.printStackTrace();
+        }
+        return id;
+    }
 }

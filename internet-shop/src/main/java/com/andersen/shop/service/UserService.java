@@ -19,4 +19,10 @@ public class UserService {
         String password = req.getParameter("password");
         userDao.addUser(new UserDto(username, password));
     }
+
+    public int getUserID(HttpServletRequest req) {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        return userDao.getUserID(new UserDto(username, password));
+    }
 }

@@ -10,7 +10,11 @@
 
 <body>
 <h1>Welcome to the internet-shop!</h1>
-<a href="login"><button>Login</button></a>
-<a href="register"><button>Register</button></a>
+<a href="login">
+    <button>Login</button>
+</a>
+<a href="register">
+    <button>Register</button>
+</a>
 </body>
 </html>
