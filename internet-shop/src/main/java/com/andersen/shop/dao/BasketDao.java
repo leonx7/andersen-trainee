@@ -1,7 +1,7 @@
 package com.andersen.shop.dao;
 
 import com.andersen.shop.ConnectionFactory;
-import dto.ProductDto;
+import com.andersen.shop.dto.ProductDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

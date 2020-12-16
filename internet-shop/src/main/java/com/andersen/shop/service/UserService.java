@@ -1,7 +1,7 @@
 package com.andersen.shop.service;
 
 import com.andersen.shop.dao.UserDao;
-import dto.UserDto;
+import com.andersen.shop.dto.UserDto;
 
 import javax.servlet.http.HttpServletRequest;
 

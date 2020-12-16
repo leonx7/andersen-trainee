@@ -1,7 +1,7 @@
 package com.andersen.shop.dao;
 
 import com.andersen.shop.ConnectionFactory;
-import dto.UserDto;
+import com.andersen.shop.dto.UserDto;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -22,8 +22,11 @@ public class MainServlet extends HttpServlet {
             case "/register":
                 renderRegisterPage(req, resp);
                 break;
-            default:
+            case "/login":
                 renderLoginPage(req, resp);
+                break;
+            case "/products":
+                renderShopPage(req,resp);
                 break;
         }
     }
@@ -34,7 +37,7 @@ public class MainServlet extends HttpServlet {
         switch (action) {
             case "/login":
                 if (userService.login(req)) {
-                    renderShopPage(req, resp);
+                    resp.sendRedirect(req.getContextPath() + "/products");
                 } else
                     throw new RuntimeException("Invalid username or password");
                 break;
