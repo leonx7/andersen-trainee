@@ -26,10 +26,8 @@
                 <td><c:out value="${product.productId}"/></td>
                 <td><c:out value="${product.name}"/></td>
                 <td><c:out value="${product.price}"/></td>
-                <form action="products/add_to_basket" method="post">
+                <form action="products" method="post">
                     <td>
-                        <label>Quantity: </label>
-                        <input type="number" name="quantity" value="1" size="5">
                         <input type="hidden" name="userId" c:out value="${userId}"/>
                         <input type="hidden" name="productId" c:out value="${product.productId}"/>
                         <button type="submit">Add to basket</button>
@@ -45,14 +43,12 @@
         <tr>
             <th>Name</th>
             <th>Quantity</th>
-            <th>Price</th>
             <th>Action</th>
         </tr>
         <c:forEach var="product" items="${productsFromBasket}">
             <tr>
                 <td><c:out value="${product.name}"/></td>
-                <td><c:out value="${product.quantity}"/></td>
-                <td><c:out value="${product.price}"/></td>
+                <td><input type="number" name="quantity" size="3" min="1" value="1"></td>
                 <td>
                     <a href="/deleteFromBasket?id=<c:out value='${book.id}' />">
                         <button>Delete</button>
@@ -60,10 +56,6 @@
                 </td>
             </tr>
         </c:forEach>
-        <tr>
-            <td><b>Total amount:</b></td>
-            <td colspan="2"><c:out value="${product.price}"/></td>
-        </tr>
     </table>
 </div>
 </body>

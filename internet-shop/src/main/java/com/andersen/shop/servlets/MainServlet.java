@@ -5,10 +5,13 @@ import com.andersen.shop.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class MainServlet extends HttpServlet {
     private ProductService productService = new ProductService();
@@ -37,8 +40,8 @@ public class MainServlet extends HttpServlet {
         switch (action) {
             case "/login":
                 if (userService.login(req)) {
-                    resp.sendRedirect(req.getContextPath() + "/products?username=" + req.getParameter("username")
-                            + "&password=" + req.getParameter("password"));
+                    userService.createCookie(req,resp);
+                    resp.sendRedirect(req.getContextPath() + "/products");
                 } else
                     throw new RuntimeException("Invalid username or password");
                 break;
@@ -46,16 +49,19 @@ public class MainServlet extends HttpServlet {
                 userService.addUser(req);
                 resp.sendRedirect(req.getContextPath() + "/login");
                 break;
-            case "/products/add_to_basket":
-                productService.addToBasket(req);
+            case "/products":
+                int userID = getIdFromOptional(readCookie(req));
+                productService.addToBasket(req, userID);
+                resp.sendRedirect(req.getContextPath() + "/products");
                 break;
         }
     }
 
     private void renderShopPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userId = getIdFromOptional(readCookie(req));
         req.setAttribute("products", productService.getAllProducts());
-        req.setAttribute("productsFromBasket", productService.getProductsFromBasket(req));
-        req.setAttribute("userId", userService.getUserID(req));
+        req.setAttribute("productsFromBasket", productService.getProductsFromBasket(userId));
+        req.setAttribute("userId", userId);
         RequestDispatcher dispatcher = req.getRequestDispatcher("shop.jsp");
         dispatcher.forward(req, resp);
     }
@@ -68,5 +74,20 @@ public class MainServlet extends HttpServlet {
     private void renderRegisterPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("register.jsp");
         dispatcher.forward(req, resp);
+    }
+
+    private Optional<String> readCookie(HttpServletRequest req) {
+        return Arrays.stream(req.getCookies())
+                .filter(c -> "userId".equals(c.getName()))
+                .map(Cookie::getValue)
+                .findAny();
+    }
+
+    private int getIdFromOptional(Optional<String> o){
+        int id = 0;
+        if(o.isPresent()){
+            id = Integer.parseInt(o.get());
+        }
+        return id;
     }
 }

@@ -31,7 +31,6 @@ CREATE TABLE products_in_basket
 (
     product_id INTEGER NOT NULL,
     basket_id  INTEGER NOT NULL,
-    quantity   INTEGER NOT NULL,
     PRIMARY KEY (product_id, basket_id)
 );
 
