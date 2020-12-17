@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasketDao {
-    private ProductDAO productDAO = new ProductDAO();
-    private UserDao userDao = new UserDao();
-    private DataSource ds = DataSourceFactory.getMySQLDataSource();
-    static private final Logger logger = LogManager.getLogger(DataSourceFactory.class);
+    private final ProductDAO productDAO = new ProductDAO();
+    private final DataSource ds = DataSourceFactory.getMySQLDataSource();
+    private static final Logger logger = LogManager.getLogger(DataSourceFactory.class);
 
     public List<ProductDto> getProducts(int userID) {
         List<ProductDto> products = new ArrayList<>();
@@ -37,7 +36,7 @@ public class BasketDao {
 
     public boolean addProduct(ProductDto product, int userID) {
         String sql = "INSERT INTO internet_shop.products_in_basket (product_id, basket_id) VALUES (?, ?)";
-        if(!checkIfProductIsInTheBasket(product,userID)){
+        if (!checkIfProductIsInTheBasket(product, userID)) {
             try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
                 statement.setInt(1, product.getProductId());
                 statement.setInt(2, userID);
@@ -51,7 +50,7 @@ public class BasketDao {
         return false;
     }
 
-    private boolean checkIfProductIsInTheBasket(ProductDto product, int userID){
+    private boolean checkIfProductIsInTheBasket(ProductDto product, int userID) {
         boolean isPresent = false;
         String sql = "SELECT * FROM products_in_basket WHERE basket_id = ? and product_id = ?";
         try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {

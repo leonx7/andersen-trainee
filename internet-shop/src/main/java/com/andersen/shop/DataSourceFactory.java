@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import javax.sql.DataSource;
 
 public class DataSourceFactory {
-    static private final Logger logger = LogManager.getLogger(DataSourceFactory.class);
+    private static final Logger logger = LogManager.getLogger(DataSourceFactory.class);
 
     private DataSourceFactory() {
     }

@@ -40,7 +40,7 @@ public class MainServlet extends HttpServlet {
         switch (action) {
             case "/login":
                 if (userService.login(req)) {
-                    userService.createCookie(req,resp);
+                    userService.createCookie(req, resp);
                     resp.sendRedirect(req.getContextPath() + "/products");
                 } else
                     throw new RuntimeException("Invalid username or password");
@@ -83,9 +83,9 @@ public class MainServlet extends HttpServlet {
                 .findAny();
     }
 
-    private int getIdFromOptional(Optional<String> o){
+    private int getIdFromOptional(Optional<String> o) {
         int id = 0;
-        if(o.isPresent()){
+        if (o.isPresent()) {
             id = Integer.parseInt(o.get());
         }
         return id;

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UserService {
-    private UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     public boolean login(HttpServletRequest req) {
         String username = req.getParameter("username");
@@ -28,11 +28,11 @@ public class UserService {
         return userDao.getUserID(new UserDto(username, password));
     }
 
-    public Cookie createCookie(HttpServletRequest req, HttpServletResponse resp){
+    public Cookie createCookie(HttpServletRequest req, HttpServletResponse resp) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         Cookie credentialsCookie = new Cookie("userId", Integer.toString(userDao.getUserID(new UserDto(username, password))));
-        credentialsCookie.setMaxAge(60*60);
+        credentialsCookie.setMaxAge(60 * 60);
         credentialsCookie.setPath("http://localhost:8080/internet-shop/");
         resp.addCookie(credentialsCookie);
         return credentialsCookie;

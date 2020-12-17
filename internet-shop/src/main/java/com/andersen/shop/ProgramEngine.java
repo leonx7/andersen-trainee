@@ -23,10 +23,10 @@ import java.util.Scanner;
 public class ProgramEngine {
     private User user = new User();
     private Basket basket = new Basket(user.getUuid());
-    static private Scanner input = new Scanner(System.in);
-    static private Warehouse warehouse = new Warehouse();
+    private static Scanner input = new Scanner(System.in);
+    private static Warehouse warehouse = new Warehouse();
 
-    static private final Logger logger = LogManager.getLogger(ProgramEngine.class);
+    private static final Logger logger = LogManager.getLogger(ProgramEngine.class);
 
     public void run(Catalog catalog) throws IOException {
         loadBasket();

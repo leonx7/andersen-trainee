@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
-    private DataSource ds = DataSourceFactory.getMySQLDataSource();
+    private final DataSource ds = DataSourceFactory.getMySQLDataSource();
 
     public List<ProductDto> getAllProducts() {
         List<ProductDto> products = new ArrayList<>();
