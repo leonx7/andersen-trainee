@@ -19,15 +19,14 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class ProgramEngine {
     private User user = new User();
     private Basket basket = new Basket(user.getUuid());
-    static private Scanner input = new Scanner(System.in);
-    static private Warehouse warehouse = new Warehouse();
+    private static Scanner input = new Scanner(System.in);
+    private static Warehouse warehouse = new Warehouse();
 
-    static private final Logger logger = LogManager.getLogger(ProgramEngine.class);
+    private static final Logger logger = LogManager.getLogger(ProgramEngine.class);
 
     public void run(Catalog catalog) throws IOException {
         loadBasket();
@@ -98,14 +97,12 @@ public class ProgramEngine {
     }
 
     private void displayProductsFromWarehouse(Catalog catalog) {
-        Map<Integer, Integer> items = warehouse.getItems();
-        Set<Integer> itemsId = items.keySet();
-        for (Integer itemId : itemsId) {
-            Product product = catalog.getProduct(itemId);
+        for (Map.Entry<Integer, Integer> entry : warehouse.getItems().entrySet()) {
+            Product product = catalog.getProduct(entry.getKey());
             if (product instanceof ProductWithExpiryDate) {
-                System.out.printf("%-4s %-10s %-3s %-6s %-20s%n", product.getId(), product.getName(), items.get(itemId), "pcs", ((ProductWithExpiryDate) product).getExpiryDate());
+                System.out.printf("%-4s %-10s %-3s %-6s %-20s%n", product.getId(), product.getName(), entry.getValue(), "pcs", ((ProductWithExpiryDate) product).getExpiryDate());
             } else {
-                System.out.printf("%-4s %-10s %-3s %-6s%n", product.getId(), product.getName(), items.get(itemId), "pcs");
+                System.out.printf("%-4s %-10s %-3s %-6s%n", product.getId(), product.getName(), entry.getValue(), "pcs");
             }
         }
     }

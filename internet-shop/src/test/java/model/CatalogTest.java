@@ -1,5 +1,9 @@
-package com.andersen.shop.model;
+package model;
 
+import com.andersen.shop.model.Catalog;
+import com.andersen.shop.model.Currency;
+import com.andersen.shop.model.Product;
+import com.andersen.shop.model.ProductGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
-package com.andersen.shop.model;
+package model;
 
+import com.andersen.shop.model.Basket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
