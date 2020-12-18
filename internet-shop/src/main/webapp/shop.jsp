@@ -26,7 +26,7 @@
                 <td><c:out value="${product.productId}"/></td>
                 <td><c:out value="${product.name}"/></td>
                 <td><c:out value="${product.price}"/></td>
-                <form action="products/add" method="post">
+                <form action="shop/add" method="post">
                     <td>
                         <input type="hidden" name="userId" c:out value="${userId}"/>
                         <input type="hidden" name="productId" c:out value="${product.productId}"/>
@@ -50,7 +50,7 @@
                 <td><c:out value="${product.name}"/></td>
                 <td><input type="number" name="quantity" min="1" value="1" style="width: 50px"></td>
                 <td>
-                    <form action="products/delete" method="post">
+                    <form action="shop/delete" method="post">
                         <input type="hidden" name="productId" c:out value="${product.productId}"/>
                         <button type="submit">Delete</button>
                     </form>

@@ -11,8 +11,8 @@
 <body>
 <h1>Welcome to the internet-shop!</h1>
 <div>
-        <button type="button" onclick="location.href='http://localhost:8080/internet-shop/login'" style="margin-right: 10px">Login</button>
-        <button type="button" onclick="location.href='http://localhost:8080/internet-shop/register'" style="margin-left: 10px">Register</button>
+        <button type="button" onclick="location.href='http://localhost:8080/login'" style="margin-right: 10px">Login</button>
+        <button type="button" onclick="location.href='http://localhost:8080/registration'" style="margin-left: 10px">Register</button>
 </div>
 </body>
 </html>

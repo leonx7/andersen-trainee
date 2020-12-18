@@ -30,6 +30,6 @@ public class ProductService {
         String productId = req.getParameter("productId");
         ProductDto product = new ProductDto();
         product.setProductId(Integer.parseInt(productId));
-        return basketDao.deleteProduct(product,userId);
+        return basketDao.deleteProduct(product, userId);
     }
 }
