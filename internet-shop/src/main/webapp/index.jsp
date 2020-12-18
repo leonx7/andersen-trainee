@@ -10,11 +10,9 @@
 
 <body>
 <h1>Welcome to the internet-shop!</h1>
-<a href="login">
-    <button>Login</button>
-</a>
-<a href="register">
-    <button>Register</button>
-</a>
+<div>
+        <button type="button" onclick="location.href='http://localhost:8080/internet-shop/login'" style="margin-right: 10px">Login</button>
+        <button type="button" onclick="location.href='http://localhost:8080/internet-shop/register'" style="margin-left: 10px">Register</button>
+</div>
 </body>
 </html>

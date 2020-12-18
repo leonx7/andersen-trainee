@@ -35,27 +35,19 @@ public class BasketDao {
     }
 
     public boolean addProduct(ProductDto product, int userID) {
-        String sql = "INSERT INTO internet_shop.products_in_basket (product_id, basket_id) VALUES (?, ?)";
+        String sql = "INSERT INTO internet_shop.products_in_basket (basket_id, product_id) VALUES (?, ?)";
         if (!checkIfProductIsInTheBasket(product, userID)) {
-            try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-                statement.setInt(1, product.getProductId());
-                statement.setInt(2, userID);
-                int i = statement.executeUpdate();
-                if (i == 1)
-                    return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            return executeUpdateStatement(product, userID, sql);
         }
         return false;
     }
 
-    private boolean checkIfProductIsInTheBasket(ProductDto product, int userID) {
-        boolean isPresent = false;
+    private boolean checkIfProductIsInTheBasket(ProductDto product, int userId) {
         String sql = "SELECT * FROM products_in_basket WHERE basket_id = ? and product_id = ?";
+        boolean isPresent = false;
         try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setInt(1, product.getProductId());
-            statement.setInt(2, userID);
+            statement.setInt(1, userId);
+            statement.setInt(2, product.getProductId());
             ResultSet resultSet = statement.executeQuery();
             isPresent = resultSet.next();
         } catch (SQLException e) {
@@ -63,4 +55,23 @@ public class BasketDao {
         }
         return isPresent;
     }
+
+    public boolean deleteProduct(ProductDto product, int userId) {
+        String sql = "DELETE FROM products_in_basket WHERE basket_id = ? and product_id = ?";
+        return executeUpdateStatement(product, userId, sql);
+    }
+
+    private boolean executeUpdateStatement(ProductDto product, int userId, String sql) {
+        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, product.getProductId());
+            int i = statement.executeUpdate();
+            if (i == 1)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

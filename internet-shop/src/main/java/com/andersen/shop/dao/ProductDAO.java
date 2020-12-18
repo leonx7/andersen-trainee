@@ -39,6 +39,7 @@ public class ProductDAO {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             product = new ProductDto();
+            product.setProductId(resultSet.getInt("id"));
             product.setName(resultSet.getString("name"));
             product.setPrice(resultSet.getDouble("price"));
         } catch (SQLException e) {

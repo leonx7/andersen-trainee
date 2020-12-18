@@ -36,6 +36,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int userId;
         String action = req.getServletPath();
         switch (action) {
             case "/login":
@@ -49,9 +50,14 @@ public class MainServlet extends HttpServlet {
                 userService.addUser(req);
                 resp.sendRedirect(req.getContextPath() + "/login");
                 break;
-            case "/products":
-                int userID = getIdFromOptional(readCookie(req));
-                productService.addToBasket(req, userID);
+            case "/products/add":
+                userId = getIdFromOptional(readCookie(req));
+                productService.addToBasket(req, userId);
+                resp.sendRedirect(req.getContextPath() + "/products");
+                break;
+            case "/products/delete":
+                userId = getIdFromOptional(readCookie(req));
+                productService.deleteFromBasket(req, userId);
                 resp.sendRedirect(req.getContextPath() + "/products");
                 break;
         }

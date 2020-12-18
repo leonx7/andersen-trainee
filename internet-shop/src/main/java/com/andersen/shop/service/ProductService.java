@@ -15,8 +15,8 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-    public List<ProductDto> getProductsFromBasket(int userID) {
-        return basketDao.getProducts(userID);
+    public List<ProductDto> getProductsFromBasket(int userId) {
+        return basketDao.getProducts(userId);
     }
 
     public boolean addToBasket(HttpServletRequest req, int userID) {
@@ -24,5 +24,12 @@ public class ProductService {
         ProductDto product = new ProductDto();
         product.setProductId(Integer.parseInt(productId));
         return basketDao.addProduct(product, userID);
+    }
+
+    public boolean deleteFromBasket(HttpServletRequest req, int userId) {
+        String productId = req.getParameter("productId");
+        ProductDto product = new ProductDto();
+        product.setProductId(Integer.parseInt(productId));
+        return basketDao.deleteProduct(product,userId);
     }
 }
