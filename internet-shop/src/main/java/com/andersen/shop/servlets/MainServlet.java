@@ -11,8 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class MainServlet extends HttpServlet {
-    private ProductService productService = new ProductService();
-    private UserService userService = new UserService();
+    private ProductService productService;
+    private UserService userService;
+
+    public MainServlet(ProductService productService, UserService userService) {
+        this.productService = productService;
+        this.userService = userService;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

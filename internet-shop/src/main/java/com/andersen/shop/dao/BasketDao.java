@@ -13,9 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasketDao {
-    private final ProductDAO productDAO = new ProductDAO();
+    private final ProductDAO productDAO;
     private final DataSource ds = DataSourceFactory.getMySQLDataSource();
     private static final Logger logger = LogManager.getLogger(DataSourceFactory.class);
+
+    public BasketDao(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
 
     public List<ProductDto> getProducts(int userID) {
         List<ProductDto> products = new ArrayList<>();

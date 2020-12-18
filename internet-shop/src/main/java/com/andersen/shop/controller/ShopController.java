@@ -11,8 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ShopController {
-    private final UserService userService = new UserService();
-    private final ProductService productService = new ProductService();
+    private final UserService userService;
+    private final ProductService productService;
+
+    public ShopController(UserService userService, ProductService productService) {
+        this.userService = userService;
+        this.productService = productService;
+    }
 
     @GetMapping("/shop")
     public String getShop(HttpServletRequest req, Model model) {

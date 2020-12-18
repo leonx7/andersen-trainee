@@ -13,4 +13,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <bean id="productServiceBean" class="com.andersen.shop.service.ProductService"/>
+    <bean id="userServiceBean" class="com.andersen.shop.service.UserService"/>
+    <bean id="basketDaoBean" class="com.andersen.shop.dao.BasketDao"/>
+    <bean id="productDaoBean" class="com.andersen.shop.dao.ProductDAO"/>
+    <bean id="userDaoBean" class="com.andersen.shop.dao.UserDao"/>
+    <bean id="dataSourceDaoBean" class="com.andersen.shop.DataSourceFactory"/>
+    <bean id="mainServletBean" class="com.andersen.shop.servlets.MainServlet"/>
+
 </beans>

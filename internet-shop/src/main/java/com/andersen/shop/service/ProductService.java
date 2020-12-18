@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class ProductService {
-    private final ProductDAO productDAO = new ProductDAO();
-    private final BasketDao basketDao = new BasketDao();
+    private final ProductDAO productDAO;
+    private final BasketDao basketDao;
+
+    public ProductService(ProductDAO productDAO, BasketDao basketDao) {
+        this.productDAO = productDAO;
+        this.basketDao = basketDao;
+    }
 
     public List<ProductDto> getAllProducts() {
         return productDAO.getAllProducts();
