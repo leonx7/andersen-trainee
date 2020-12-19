@@ -8,11 +8,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    private int id;
+    private long id;
     private String name;
     private ProductGroup productGroup;
     private double price;
     private Currency currency;
+
+    public Product(long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
     @Override
     public String toString() {

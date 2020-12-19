@@ -1,7 +1,6 @@
 package com.andersen.shop.service;
 
 import com.andersen.shop.dao.UserDao;
-import com.andersen.shop.dto.UserDto;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -10,34 +9,37 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class UserService {
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public boolean login(HttpServletRequest req) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        return userDao.validate(new UserDto(username, password));
+        return userDao.validate(username, password);
     }
 
     public void addUser(HttpServletRequest req) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (!username.equals("") && !password.equals("")) {
-            userDao.addUser(new UserDto(username, password));
+            userDao.addUser(username, password);
         } else {
             throw new RuntimeException("Username or password can't be empty!");
         }
     }
 
-    public int getUserID(HttpServletRequest req) {
+    public long getUserID(HttpServletRequest req) {
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        return userDao.getUserID(new UserDto(username, password));
+        return userDao.getUserID(username);
     }
 
     public Cookie createCookie(HttpServletRequest req, HttpServletResponse resp) {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        Cookie credentialsCookie = new Cookie("userId", Integer.toString(userDao.getUserID(new UserDto(username, password))));
+        Cookie credentialsCookie = new Cookie("userId", Long.toString(userDao.getUserID(username)));
         credentialsCookie.setMaxAge(60 * 60);
         credentialsCookie.setPath("http://localhost:8080/internet-shop/");
         resp.addCookie(credentialsCookie);
