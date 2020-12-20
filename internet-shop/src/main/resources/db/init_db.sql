@@ -9,7 +9,7 @@ DROP PROCEDURE IF EXISTS get_user_purchase_history;
 CREATE TABLE users
 (
     id       INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name     VARCHAR(10) NOT NULL,
+    username VARCHAR(10) NOT NULL,
     password VARCHAR(8)  NOT NULL
 );
 
@@ -29,9 +29,10 @@ CREATE TABLE basket
 
 CREATE TABLE products_in_basket
 (
-    product_id INTEGER NOT NULL,
+    id         INTEGER AUTO_INCREMENT PRIMARY KEY,
     basket_id  INTEGER NOT NULL,
-    PRIMARY KEY (product_id, basket_id)
+    product_id INTEGER NOT NULL,
+    quantity   INTEGER NOT NULL
 );
 
 CREATE TABLE orders

@@ -1,66 +1,40 @@
 package com.andersen.shop.dao;
 
-import com.andersen.shop.DataSourceFactory;
-import com.andersen.shop.dto.ProductDto;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.andersen.shop.model.Product;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasketDao {
-    private final ProductDAO productDAO = new ProductDAO();
-    private final DataSource ds = DataSourceFactory.getMySQLDataSource();
-    private static final Logger logger = LogManager.getLogger(DataSourceFactory.class);
+public class BasketDao extends JdbcDaoSupport {
+    private final ProductDAO productDAO;
 
-    public List<ProductDto> getProducts(int userID) {
-        List<ProductDto> products = new ArrayList<>();
-        String sql = "SELECT * FROM products_in_basket WHERE basket_id = ?";
-        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setInt(1, userID);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                ProductDto product = productDAO.getProductById(resultSet.getInt("product_id"));
-                products.add(product);
+    public BasketDao(ProductDAO productDAO, DataSource dataSource) {
+        this.productDAO = productDAO;
+        this.setDataSource(dataSource);
+    }
+
+    public List<Product> getAllProducts(long userId) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT pib.product_id FROM products_in_basket pib WHERE pib.basket_id = ?";
+        List<Long> list = this.getJdbcTemplate().query(sql, new Object[]{userId}, (resultSet, i) -> resultSet.getLong(1));
+        if (!list.isEmpty()) {
+            for (Long id : list) {
+                products.add(productDAO.getProductById(id));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        logger.info("Selected all products from 'basket'");
         return products;
     }
 
-    public boolean addProduct(ProductDto product, int userID) {
-        String sql = "INSERT INTO internet_shop.products_in_basket (product_id, basket_id) VALUES (?, ?)";
-        if (!checkIfProductIsInTheBasket(product, userID)) {
-            try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-                statement.setInt(1, product.getProductId());
-                statement.setInt(2, userID);
-                int i = statement.executeUpdate();
-                if (i == 1)
-                    return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+    public int addToBasket(long basketId, long productId) {
+        String sql = "INSERT INTO products_in_basket (basket_id, product_id, quantity) VALUES (?, ?, ?)";
+        return this.getJdbcTemplate().update(sql, basketId, productId, 0);
     }
 
-    private boolean checkIfProductIsInTheBasket(ProductDto product, int userID) {
-        boolean isPresent = false;
-        String sql = "SELECT * FROM products_in_basket WHERE basket_id = ? and product_id = ?";
-        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setInt(1, product.getProductId());
-            statement.setInt(2, userID);
-            ResultSet resultSet = statement.executeQuery();
-            isPresent = resultSet.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return isPresent;
+    public int deleteFromBasket(long basketId, long productId) {
+        String sql = "DELETE FROM products_in_basket WHERE basket_id = ? and product_id = ?";
+        return this.getJdbcTemplate().update(sql, basketId, productId);
     }
+
 }

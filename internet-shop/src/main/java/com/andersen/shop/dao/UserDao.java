@@ -1,57 +1,56 @@
 package com.andersen.shop.dao;
 
-import com.andersen.shop.DataSourceFactory;
-import com.andersen.shop.dto.UserDto;
+import com.andersen.shop.mapper.UserMapper;
+import com.andersen.shop.model.User;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class UserDao {
-    private final DataSource ds = DataSourceFactory.getMySQLDataSource();
+public class UserDao extends JdbcDaoSupport {
 
-    public boolean addUser(UserDto user) {
-        String sql = "INSERT INTO internet_shop.users (name, password) VALUES (?, ?)";
-        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            int i = statement.executeUpdate();
-            if (i == 1)
-                return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public UserDao(DataSource dataSource) {
+        this.setDataSource(dataSource);
+    }
+
+    public boolean addUser(String username, String password) {
+        String sqlInsert = "INSERT INTO users (username, password) VALUES (?, ?)";
+        if (!usernameExists(username)) {
+            int i = this.getJdbcTemplate().update(sqlInsert, username, password);
+            return i == 1;
         }
         return false;
     }
 
-    public boolean validate(UserDto user) {
-        boolean status = false;
-        String sql = "SELECT * FROM internet_shop.users WHERE name = ? and password = ?";
-        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            ResultSet resultSet = statement.executeQuery();
-            status = resultSet.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public boolean validate(String username, String password) {
+        String sql = UserMapper.BASE_SQL + " WHERE u.username = ? AND u.password = ?";
+        try {
+            this.getJdbcTemplate().queryForObject(sql, new Object[]{username, password}, new BeanPropertyRowMapper<>(User.class));
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
         }
-        return status;
     }
 
-    public int getUserID(UserDto user) {
-        int id = 0;
-        String sql = "SELECT * FROM internet_shop.users WHERE name = ? AND password = ?";
-        try (PreparedStatement statement = ds.getConnection().prepareStatement(sql)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return resultSet.getInt("id");
-        } catch (SQLException e) {
-            System.out.println("SQLException in getUserId()");
+    public long getUserID(String username) {
+        String sql = UserMapper.BASE_SQL + " WHERE u.username = ?";
+        try {
+            User user = this.getJdbcTemplate().queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
+            return user.getId();
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
         }
-        return id;
+        throw new RuntimeException("The user with name " + username + " does not exist!");
+    }
+
+    private boolean usernameExists(String username) {
+        String sql = UserMapper.BASE_SQL + " WHERE u.username = ?";
+        try {
+            this.getJdbcTemplate().queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 }

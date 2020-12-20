@@ -1,8 +1,8 @@
-INSERT INTO users (name, password)
+INSERT INTO users (username, password)
 VALUES ('Bob', '111');
-INSERT INTO users (name, password)
+INSERT INTO users (username, password)
 VALUES ('Tom', '111');
-INSERT INTO users (name, password)
+INSERT INTO users (username, password)
 VALUES ('Baba', '111');
 INSERT INTO orders (user_id, sum)
 VALUES (1, 2000.00);

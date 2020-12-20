@@ -2,27 +2,32 @@ package com.andersen.shop.service;
 
 import com.andersen.shop.dao.BasketDao;
 import com.andersen.shop.dao.ProductDAO;
-import com.andersen.shop.dto.ProductDto;
+import com.andersen.shop.model.Product;
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class ProductService {
-    private final ProductDAO productDAO = new ProductDAO();
-    private final BasketDao basketDao = new BasketDao();
+    private final ProductDAO productDAO;
+    private final BasketDao basketDao;
 
-    public List<ProductDto> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productDAO.getAllProducts();
     }
 
-    public List<ProductDto> getProductsFromBasket(int userID) {
-        return basketDao.getProducts(userID);
+    public List<Product> getProductsFromBasket(long userId) {
+        return basketDao.getAllProducts(userId);
     }
 
-    public boolean addToBasket(HttpServletRequest req, int userID) {
-        String productId = req.getParameter("productId");
-        ProductDto product = new ProductDto();
-        product.setProductId(Integer.parseInt(productId));
-        return basketDao.addProduct(product, userID);
+    public int addToBasket(HttpServletRequest req, long userID) {
+        long productId = Long.parseLong(req.getParameter("productId"));
+        return basketDao.addToBasket(userID, productId);
+    }
+
+    public int deleteFromBasket(HttpServletRequest req, long userId) {
+        long productId = Long.parseLong(req.getParameter("productId"));
+        return basketDao.deleteFromBasket(userId, productId);
     }
 }

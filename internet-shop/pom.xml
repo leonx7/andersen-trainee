@@ -17,6 +17,7 @@
         <jstl.version>1.2</jstl.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <mysql.version>8.0.22</mysql.version>
+        <spring.version>5.3.1</spring.version>
     </properties>
 
 
@@ -40,6 +41,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
 
 
     </dependencies>

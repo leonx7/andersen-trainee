@@ -23,9 +23,9 @@
     </table>
     <input type="submit" value="Submit"/>
 </form>
-<p><a href="register">
-    <button>Register</button>
-</a></p>
+<p>
+    <button type="button" onclick="location.href='http://localhost:8080/registration'">Register</button>
+</p>
 </body>
 
 </html>
