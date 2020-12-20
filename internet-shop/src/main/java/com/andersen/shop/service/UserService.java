@@ -1,6 +1,7 @@
 package com.andersen.shop.service;
 
 import com.andersen.shop.dao.UserDao;
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,12 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class UserService {
     private final UserDao userDao;
-
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     public boolean login(HttpServletRequest req) {
         String username = req.getParameter("username");
