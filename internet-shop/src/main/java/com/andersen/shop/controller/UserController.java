@@ -30,7 +30,7 @@ public class UserController {
             userService.createCookie(req, resp);
         } else
             throw new RuntimeException("Invalid username or password");
-        return "redirect: /shop";
+        return "redirect:/shop";
     }
 
     @GetMapping("/registration")
@@ -41,6 +41,6 @@ public class UserController {
     @PostMapping("/registration")
     public String register(HttpServletRequest req) {
         userService.addUser(req);
-        return "redirect: /login";
+        return "redirect:/login";
     }
 }

@@ -29,13 +29,13 @@ public class ShopController {
     public String addProduct(HttpServletRequest req) {
         int userId = userService.getIdFromCookie(req);
         productService.addToBasket(req, userId);
-        return "redirect: /shop";
+        return "redirect:/shop";
     }
 
     @PostMapping("shop/delete")
     public String deleteProduct(HttpServletRequest req) {
         int userId = userService.getIdFromCookie(req);
         productService.deleteFromBasket(req, userId);
-        return "redirect: /shop";
+        return "redirect:/shop";
     }
 }
