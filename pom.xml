@@ -22,6 +22,8 @@
         <junit-jupiter-api.version>5.7.0</junit-jupiter-api.version>
         <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
         <websocket.version>2.4.0</websocket.version>
+        <jstl.version>1.2</jstl.version>
+        <spring.version>5.4.2</spring.version>
     </properties>
 
     <parent>
@@ -95,7 +97,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,12 +119,21 @@
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
-
-
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
     </dependencies>
 

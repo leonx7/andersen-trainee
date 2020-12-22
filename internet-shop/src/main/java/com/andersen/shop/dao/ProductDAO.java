@@ -4,10 +4,12 @@ import com.andersen.shop.mapper.ProductMapper;
 import com.andersen.shop.model.Product;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
 
+@Transactional
 public class ProductDAO extends JdbcDaoSupport {
 
     public ProductDAO(DataSource dataSource) {

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,15 +21,6 @@ public class UserController {
     @GetMapping("/login")
     public String getLogin() {
         return "login";
-    }
-
-    @PostMapping("/login")
-    public String login(HttpServletRequest req, HttpServletResponse resp) {
-        if (userService.login(req)) {
-            userService.createCookie(req, resp);
-        } else
-            throw new RuntimeException("Invalid username or password");
-        return "redirect:/shop";
     }
 
     @GetMapping("/registration")

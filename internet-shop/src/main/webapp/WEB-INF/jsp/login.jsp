@@ -10,7 +10,7 @@
 
 <body>
 <h1>Login Form</h1>
-<form action="login" method="post">
+<form action="shop" method="post">
     <table>
         <tr>
             <td>UserName</td>
