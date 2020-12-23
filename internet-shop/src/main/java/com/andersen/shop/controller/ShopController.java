@@ -18,7 +18,7 @@ public class ShopController {
     @GetMapping("/shop")
     public String getShop(Model model, Principal principal) {
         model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("productsFromBasket", productService.getProductsFromBasket(principal));
+        model.addAttribute("items", productService.getItemsFromBasket(principal));
         return "shop";
     }
 
