@@ -6,7 +6,9 @@ import com.andersen.shop.model.Product;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ProductService {
@@ -17,17 +19,24 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-    public List<Product> getProductsFromBasket(long userId) {
-        return basketDao.getAllProducts(userId);
+    public List<Product> getProductsFromBasket(Principal principal) {
+        String username = new String();
+        if (Objects.nonNull(principal)) {
+            username = principal.getName();
+        }
+        return basketDao.getAllProducts(username);
     }
 
-    public int addToBasket(HttpServletRequest req, long userID) {
+    public int addToBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
-        return basketDao.addToBasket(userID, productId);
+        String username = new String();
+        username = principal.getName();
+        return basketDao.addToBasket(username, productId);
     }
 
-    public int deleteFromBasket(HttpServletRequest req, long userId) {
+    public int deleteFromBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
-        return basketDao.deleteFromBasket(userId, productId);
+        String username = principal.getName();
+        return basketDao.deleteFromBasket(username, productId);
     }
 }
