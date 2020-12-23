@@ -30,18 +30,13 @@ public class ProductService {
     public int addToBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
         String username = new String();
-        if (Objects.nonNull(principal)) {
-            username = principal.getName();
-        }
+        username = principal.getName();
         return basketDao.addToBasket(username, productId);
     }
 
     public int deleteFromBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
-        String username = new String();
-        if (Objects.nonNull(principal)) {
-            username = principal.getName();
-        }
+        String username = principal.getName();
         return basketDao.deleteFromBasket(username, productId);
     }
 }

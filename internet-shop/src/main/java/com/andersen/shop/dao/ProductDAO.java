@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.Types;
 import java.util.List;
 
 @Transactional
@@ -18,11 +19,11 @@ public class ProductDAO extends JdbcDaoSupport {
 
     public List<Product> getAllProducts() {
         String sql = ProductMapper.BASE_SQL;
-        return this.getJdbcTemplate().query(sql, new Object[]{}, new BeanPropertyRowMapper<>(Product.class));
+        return this.getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(Product.class));
     }
 
     public Product getProductById(long id) {
         String sql = ProductMapper.BASE_SQL + " WHERE p.id = ?";
-        return this.getJdbcTemplate().queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Product.class));
+        return this.getJdbcTemplate().queryForObject(sql, new BeanPropertyRowMapper<>(Product.class), id);
     }
 }

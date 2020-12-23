@@ -25,7 +25,6 @@ public class ShopController {
 
     @PostMapping("shop/add")
     public String addProduct(HttpServletRequest req, Principal principal) {
-
         productService.addToBasket(req, principal);
         return "redirect:/shop";
     }

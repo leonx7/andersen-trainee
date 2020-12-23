@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +30,9 @@ public class BasketDao extends JdbcDaoSupport {
         }
         List<Product> products = new ArrayList<>();
         String sql = "SELECT pib.product_id FROM products_in_basket pib WHERE pib.basket_id = ?";
-        List<Long> list = this.getJdbcTemplate().query(sql, new Object[]{userId}, (resultSet, i) -> resultSet.getLong(1));
-        if (!list.isEmpty()) {
-            for (Long id : list) {
-                products.add(productDAO.getProductById(id));
-            }
+        List<Long> list = this.getJdbcTemplate().query(sql,  (resultSet, i) -> resultSet.getLong(1), userId);
+        for (Long id : list) {
+            products.add(productDAO.getProductById(id));
         }
         return products;
     }
@@ -65,11 +64,9 @@ public class BasketDao extends JdbcDaoSupport {
 
     public boolean checkIfProductIsInTheBasket(long basketId, long productId) {
         String sql = "SELECT pib.product_id FROM products_in_basket pib WHERE pib.basket_id = ?";
-        List<Long> list = this.getJdbcTemplate().query(sql, new Object[]{basketId}, (resultSet, i) -> resultSet.getLong(1));
-        for (Long id : list) {
-            if (id == productId) {
-                return true;
-            }
+        List<Long> list = this.getJdbcTemplate().query(sql, (resultSet, i) -> resultSet.getLong(1), basketId);
+        if(list.contains(productId)){
+            return true;
         }
         return false;
     }
