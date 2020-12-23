@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +28,16 @@ public class BasketDao extends JdbcDaoSupport {
             e.printStackTrace();
         }
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT pib.product_id FROM products_in_basket pib WHERE pib.basket_id = ?";
-        List<Long> list = this.getJdbcTemplate().query(sql,  (resultSet, i) -> resultSet.getLong(1), userId);
+        String sql = "SELECT i.product_id FROM items i WHERE i.basket_id = ?";
+        List<Long> list = this.getJdbcTemplate().query(sql, (resultSet, i) -> resultSet.getLong(1), userId);
         for (Long id : list) {
             products.add(productDAO.getProductById(id));
         }
         return products;
     }
 
-    public int addToBasket(String username, long productId) {
-        String sql = "INSERT INTO products_in_basket (basket_id, product_id, quantity) VALUES (?, ?, ?)";
+    public int addToBasket(String username, long productId, double price) {
+        String sql = "INSERT INTO items (basket_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
         long basketId = 0;
         try {
             basketId = userDao.getUserID(username);
@@ -46,13 +45,13 @@ public class BasketDao extends JdbcDaoSupport {
             e.printStackTrace();
         }
         if (!checkIfProductIsInTheBasket(basketId, productId)) {
-            return this.getJdbcTemplate().update(sql, basketId, productId, 0);
+            return this.getJdbcTemplate().update(sql, basketId, productId, 0, price);
         }
         return 0;
     }
 
     public int deleteFromBasket(String username, long productId) {
-        String sql = "DELETE FROM products_in_basket WHERE basket_id = ? and product_id = ?";
+        String sql = "DELETE FROM items WHERE basket_id = ? and product_id = ?";
         long basketId = 0;
         try {
             basketId = userDao.getUserID(username);
@@ -63,9 +62,9 @@ public class BasketDao extends JdbcDaoSupport {
     }
 
     public boolean checkIfProductIsInTheBasket(long basketId, long productId) {
-        String sql = "SELECT pib.product_id FROM products_in_basket pib WHERE pib.basket_id = ?";
+        String sql = "SELECT i.product_id FROM items i WHERE i.basket_id = ?";
         List<Long> list = this.getJdbcTemplate().query(sql, (resultSet, i) -> resultSet.getLong(1), basketId);
-        if(list.contains(productId)){
+        if (list.contains(productId)) {
             return true;
         }
         return false;

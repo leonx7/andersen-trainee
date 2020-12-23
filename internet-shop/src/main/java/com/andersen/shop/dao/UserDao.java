@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 
 @Transactional
 public class UserDao extends JdbcDaoSupport {

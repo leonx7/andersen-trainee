@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 import java.util.List;
 
 @Transactional

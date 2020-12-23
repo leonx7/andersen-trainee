@@ -1,7 +1,6 @@
 package com.andersen.shop.controller;
 
 import com.andersen.shop.service.ProductService;
-import com.andersen.shop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

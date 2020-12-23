@@ -16,7 +16,7 @@ public class ProductWithExpiryDate extends Product {
     @ExpiryDate
     private LocalDate expiryDate;
 
-    public ProductWithExpiryDate(int productId, String name, ProductGroup productGroup, double price, Currency currency) {
-        super(productId, name, productGroup, price, currency);
+    public ProductWithExpiryDate(long id, String name, ProductGroup productGroup, double price, Currency currency) {
+        super(id, name, productGroup, price, currency);
     }
 }

@@ -45,6 +45,7 @@
                     <td>
                         <input type="hidden" name="userId" c:out value="${userId}"/>
                         <input type="hidden" name="productId" c:out value="${product.id}"/>
+                        <input type="hidden" name="price" c:out value="${product.price}"/>
                         <button type="submit">Add to basket</button>
                     </td>
                 </form>

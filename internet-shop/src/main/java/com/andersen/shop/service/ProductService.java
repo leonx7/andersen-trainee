@@ -29,9 +29,9 @@ public class ProductService {
 
     public int addToBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
-        String username = new String();
-        username = principal.getName();
-        return basketDao.addToBasket(username, productId);
+        double price = Double.parseDouble(req.getParameter("price"));
+        String username = principal.getName();
+        return basketDao.addToBasket(username, productId, price);
     }
 
     public int deleteFromBasket(HttpServletRequest req, Principal principal) {
