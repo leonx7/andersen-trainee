@@ -28,6 +28,8 @@ public class Product {
     private String name;
     @Enumerated(EnumType.STRING)
     private ProductGroup productGroup;
+    @Enumerated(EnumType.STRING)
+    private Country country;
     private double price;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
