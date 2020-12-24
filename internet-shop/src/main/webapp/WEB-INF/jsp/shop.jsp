@@ -45,6 +45,8 @@
                     <td>
                         <input type="hidden" name="userId" c:out value="${userId}"/>
                         <input type="hidden" name="productId" c:out value="${product.id}"/>
+                        <input type="hidden" name="price" c:out value="${product.price}"/>
+                        <input type="hidden" name="name" c:out value="${product.name}"/>
                         <button type="submit">Add to basket</button>
                     </td>
                 </form>
@@ -62,13 +64,13 @@
                    <th>Quantity</th>
                    <th>Action</th>
                </tr>
-               <c:forEach var="product" items="${productsFromBasket}">
+               <c:forEach var="item" items="${items}">
                    <tr>
-                       <td><c:out value="${product.name}"/></td>
+                       <td><c:out value="${item.name}"/></td>
                        <td><input type="number" name="quantity" min="1" value="1" style="width: 50px"></td>
                        <td>
                            <form action="shop/delete" method="post">
-                               <input type="hidden" name="productId" c:out value="${product.id}"/>
+                               <input type="hidden" name="productId" c:out value="${item.id}"/>
                                <button type="submit">Delete</button>
                            </form>
                        </td>

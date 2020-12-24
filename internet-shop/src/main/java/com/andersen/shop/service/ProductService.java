@@ -2,13 +2,13 @@ package com.andersen.shop.service;
 
 import com.andersen.shop.dao.BasketDao;
 import com.andersen.shop.dao.ProductDAO;
+import com.andersen.shop.model.Item;
 import com.andersen.shop.model.Product;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ProductService {
@@ -19,19 +19,17 @@ public class ProductService {
         return productDAO.getAllProducts();
     }
 
-    public List<Product> getProductsFromBasket(Principal principal) {
-        String username = new String();
-        if (Objects.nonNull(principal)) {
-            username = principal.getName();
-        }
-        return basketDao.getAllProducts(username);
+    public List<Item> getItemsFromBasket(Principal principal) {
+        String username = principal.getName();
+        return basketDao.getAllItems(username);
     }
 
     public int addToBasket(HttpServletRequest req, Principal principal) {
         long productId = Long.parseLong(req.getParameter("productId"));
-        String username = new String();
-        username = principal.getName();
-        return basketDao.addToBasket(username, productId);
+        double price = Double.parseDouble(req.getParameter("price"));
+        String name = req.getParameter("name");
+        String username = principal.getName();
+        return basketDao.addToBasket(username, productId, name, price);
     }
 
     public int deleteFromBasket(HttpServletRequest req, Principal principal) {

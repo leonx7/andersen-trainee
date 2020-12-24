@@ -30,7 +30,7 @@ public class AppConfig {
 
     @Bean
     public BasketDao basketDao() {
-        return new BasketDao(productDAO(), dataSource(), userDao());
+        return new BasketDao(dataSource(), userDao());
     }
 
     @Bean

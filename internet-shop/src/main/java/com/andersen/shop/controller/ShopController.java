@@ -1,7 +1,6 @@
 package com.andersen.shop.controller;
 
 import com.andersen.shop.service.ProductService;
-import com.andersen.shop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ public class ShopController {
     @GetMapping("/shop")
     public String getShop(Model model, Principal principal) {
         model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("productsFromBasket", productService.getProductsFromBasket(principal));
+        model.addAttribute("items", productService.getItemsFromBasket(principal));
         return "shop";
     }
 
