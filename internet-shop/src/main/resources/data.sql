@@ -12,11 +12,11 @@ VALUES ('Tom', '$2y$12$3PFYCb6EJLqj6BWphapxJu9QcUgTvtrwBhw2KMlByv.n3hfx8Hxje', '
 INSERT INTO users (username, password, role, basket_id)
 VALUES ('Baba', '$2y$12$beV.Hg5eVrtztXUqpM2n3./KzEYB9uKRrCTohA/5Yq3Aqe8YKbUIi', 'USER', 3);
 
-INSERT INTO products (name, price, product_group, currency_id, country)
-VALUES ('bread', 2.5, 'Food', 1, 'BY');
-INSERT INTO products (name, price, product_group, currency_id, country)
-VALUES ('milk', 5.0, 'Food', 1, 'BY');
-INSERT INTO products (name, price, product_group, currency_id, country)
-VALUES ('knife', 25.0, 'NotFood', 2, 'USA');
-INSERT INTO products (name, price, product_group, currency_id, country)
-VALUES ('mirror', 15.0, 'NotFood', 2, 'RU');
+INSERT INTO products (name, price, product_group, currency_id, country, product_type, expiry_date)
+VALUES ('bread', 2.5, 'Food', 1, 'BY', 1, '2020.12.23');
+INSERT INTO products (name, price, product_group, currency_id, country, product_type, expiry_date)
+VALUES ('milk', 5.0, 'Food', 1, 'BY', 1, '2020.12.28');
+INSERT INTO products (name, price, product_group, currency_id, country, product_type)
+VALUES ('knife', 25.0, 'NotFood', 2, 'USA', 0);
+INSERT INTO products (name, price, product_group, currency_id, country, product_type)
+VALUES ('mirror', 15.0, 'NotFood', 2, 'RU', 0);

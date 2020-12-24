@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ProductService {

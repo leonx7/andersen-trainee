@@ -17,13 +17,11 @@ import java.util.List;
 
 @Transactional
 public class BasketDao extends JdbcDaoSupport {
-    private final ProductDAO productDAO;
     private final UserDao userDao;
     @PersistenceContext()
     private EntityManager em;
 
-    public BasketDao(ProductDAO productDAO, DataSource dataSource, UserDao userDao) {
-        this.productDAO = productDAO;
+    public BasketDao(DataSource dataSource, UserDao userDao) {
         this.userDao = userDao;
         this.setDataSource(dataSource);
     }
